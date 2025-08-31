@@ -14,6 +14,7 @@ function addTask() {
     deleteBtn.innerText = '❌';
     deleteBtn.style.background = 'transparent';
     deleteBtn.style.border = 'none';
+     deleteBtn.style.color = 'red';
     deleteBtn.style.cursor = 'pointer';
 
     deleteBtn.addEventListener('click', (e) => {
