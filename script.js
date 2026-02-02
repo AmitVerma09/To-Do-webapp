@@ -1,27 +1,43 @@
+const taskInput = document.getElementById('taskInput');
+const taskList = document.getElementById('taskList');
+
 function addTask() {
-    const taskInput = document.getElementById('taskInput');
     const taskText = taskInput.value.trim();
-    if (taskText === "") return;
+    
+    if (taskText === "") {
+        alert("Write something!");
+        return;
+    }
 
     const li = document.createElement('li');
-    li.innerText = taskText;
+    
+    li.innerHTML = `
+        <span class="text">${taskText}</span>
+        <button class="delete-btn">❌</button>
+    `;
 
-    li.addEventListener('click', () => {
-        li.classList.toggle('done');
+    // Click karne par done mark karna
+    li.addEventListener('click', function(e) {
+        if(e.target.tagName !== 'BUTTON') {
+            this.classList.toggle('done');
+        }
     });
 
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerText = '❌';
-    deleteBtn.style.background = 'transparent';
-    deleteBtn.style.border = 'none';
-    deleteBtn.style.cursor = 'pointer';
-
+    // Delete button logic
+    const deleteBtn = li.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         li.remove();
     });
 
-    li.appendChild(deleteBtn);
-    document.getElementById('taskList').appendChild(li);
-    taskInput.value = "";
+    taskList.appendChild(li);
+    taskInput.value = ""; 
+    taskInput.focus();   // Cursor wapas set karein
 }
+
+// Enter key se add karne ke liye
+taskInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        addTask();
+    }
+});
