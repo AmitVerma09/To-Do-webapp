@@ -3,27 +3,23 @@ const taskList = document.getElementById('taskList');
 
 function addTask() {
     const taskText = taskInput.value.trim();
-    
+
     if (taskText === "") {
         alert("Write something!");
         return;
     }
 
     const li = document.createElement('li');
-    
-    li.innerHTML = `
-        <span class="text">${taskText}</span>
-        <button class="delete-btn">❌</button>
-    `;
 
-    // Click karne par done mark karna
-    li.addEventListener('click', function(e) {
-        if(e.target.tagName !== 'BUTTON') {
+    li.innerHTML = ` <span class="text">${taskText}</span>
+        <button class="delete-btn">❌</button>`;
+
+    li.addEventListener('click', function (e) {
+        if (e.target.tagName !== 'BUTTON') {
             this.classList.toggle('done');
         }
     });
 
-    // Delete button logic
     const deleteBtn = li.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', (e) => {
         e.stopPropagation();
